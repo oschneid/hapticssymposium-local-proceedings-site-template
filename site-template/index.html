@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IEEE EXAMPLE 2025 — Proceedings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,600;1,300&family=IBM+Plex+Serif:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js"></script>
+  <style>
+    /* ── Design direction: IEEE-authoritative editorial — dark navy, steel accents,
+       monospace precision. Feels like a technical instrument, not a website. ── */
+
+    :root {
+      --navy:    #0a0f1e;
+      --navy2:   #111827;
+      --navy3:   #1e2a3a;
+      --steel:   #2d4a6e;
+      --accent:  #4e9af1;
+      --accent2: #7ec8e3;
+      --white:   #f0f4f8;
+      --muted:   #8ba3be;
+      --border:  #1e3a5a;
+      --tag-bg:  #0f2340;
+      --mono: 'IBM Plex Mono', monospace;
+      --sans: 'IBM Plex Sans', sans-serif;
+      --serif: 'IBM Plex Serif', serif;
+      --radius: 4px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--navy2);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .header-logo {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .header-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: var(--navy2);
+      border-bottom: 1px solid var(--border);
+      padding: 3rem 2rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(78,154,241,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 1.8rem;
+    }
+
+    /* ── Stats bar ── */
+    .stats {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stat-num {
+      font-family: var(--mono);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 2px;
+    }
+
+    /* ── Layout ── */
+    .layout {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    @media (max-width: 700px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+    }
+
+    /* ── Sidebar ── */
+    .sidebar {
+      position: sticky;
+      top: 72px;
+    }
+
+    .sidebar-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .sidebar-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .filter-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px 8px;
+      border-radius: var(--radius);
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--muted);
+      transition: all 0.15s;
+      border-left: 2px solid transparent;
+    }
+
+    .filter-btn:hover {
+      background: var(--navy3);
+      color: var(--white);
+    }
+
+    .filter-btn.active {
+      color: var(--accent);
+      border-left-color: var(--accent);
+      background: var(--tag-bg);
+    }
+
+    .filter-count {
+      font-family: var(--mono);
+      font-size: 10px;
+      float: right;
+      color: var(--steel);
+      margin-top: 2px;
+    }
+
+    /* ── Main content ── */
+    .main {}
+
+    /* ── Search bar ── */
+    .search-wrap {
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+      font-size: 14px;
+    }
+
+    #search {
+      width: 100%;
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 14px;
+      padding: 10px 12px 10px 36px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    #search::placeholder { color: var(--muted); }
+    #search:focus { border-color: var(--accent); }
+
+    .search-hint {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    /* ── Results info ── */
+    .results-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--mono);
+    }
+
+    /* ── Session group ── */
+    .session-group {
+      margin-bottom: 2rem;
+    }
+
+    .session-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      margin-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .session-day-badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      background: var(--steel);
+      color: var(--accent2);
+      padding: 2px 7px;
+      border-radius: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .session-name {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .session-time {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-left: auto;
+    }
+
+    /* ── Paper card ── */
+    .paper-card {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.6rem;
+      transition: border-color 0.2s, transform 0.1s;
+      position: relative;
+    }
+
+    .paper-card:hover {
+      border-color: var(--accent);
+      transform: translateX(2px);
+    }
+
+    .paper-card.hidden { display: none; }
+
+    .paper-title {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1.4;
+      margin-bottom: 0.35rem;
+    }
+
+    .paper-authors {
+      font-size: 12px;
+      color: var(--accent2);
+      margin-bottom: 0.4rem;
+      font-style: italic;
+    }
+
+    .paper-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      background: var(--tag-bg);
+      color: var(--muted);
+      padding: 2px 6px;
+      border-radius: 2px;
+      border: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .tag.type-wip { color: #f9a825; border-color: #3a2a00; background: #1a1200; }
+    .tag.type-full { color: #4caf7d; border-color: #0a2a18; background: #011208; }
+
+    .paper-pdf-link {
+      margin-left: auto;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 3px 8px;
+      border-radius: 2px;
+      transition: background 0.15s, color 0.15s;
+      white-space: nowrap;
+    }
+
+    .paper-pdf-link:hover {
+      background: var(--accent);
+      color: var(--navy);
+      border-color: var(--accent);
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 3rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+
+    /* ── Highlight ── */
+    mark {
+      background: rgba(78,154,241,0.25);
+      color: var(--white);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-logo">IEEE EXAMPLE 2025</div>
+  <div class="header-title">Conference Proceedings</div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Proceedings of the</div>
+    <h1>IEEE International Conference on Example Systems 2025</h1>
+    <p class="hero-sub">March 10–12, 2025 &nbsp;·&nbsp; Convention Center, City, Country &nbsp;·&nbsp; ISBN 978-x-xxxx-xxxx-x</p>
+    <div class="stats">
+      <div class="stat">
+        <span class="stat-num" id="total-count">—</span>
+        <span class="stat-label">Total Papers</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" id="full-count">—</span>
+        <span class="stat-label">Full Papers</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" id="wip-count">—</span>
+        <span class="stat-label">Work-in-Progress</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" id="session-count">—</span>
+        <span class="stat-label">Sessions</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Filter by Day</div>
+      <button class="filter-btn active" data-filter="day" data-value="all" onclick="setFilter('day','all',this)">All Days <span class="filter-count" id="cnt-day-all"></span></button>
+      <button class="filter-btn" data-filter="day" data-value="Day 1" onclick="setFilter('day','Day 1',this)">Day 1 — Mar 10 <span class="filter-count" id="cnt-day-1"></span></button>
+      <button class="filter-btn" data-filter="day" data-value="Day 2" onclick="setFilter('day','Day 2',this)">Day 2 — Mar 11 <span class="filter-count" id="cnt-day-2"></span></button>
+      <button class="filter-btn" data-filter="day" data-value="Day 3" onclick="setFilter('day','Day 3',this)">Day 3 — Mar 12 <span class="filter-count" id="cnt-day-3"></span></button>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-label">Paper Type</div>
+      <button class="filter-btn active" data-filter="type" data-value="all" onclick="setFilter('type','all',this)">All Types <span class="filter-count" id="cnt-type-all"></span></button>
+      <button class="filter-btn" data-filter="type" data-value="Full Paper" onclick="setFilter('type','Full Paper',this)">Full Papers <span class="filter-count" id="cnt-type-full"></span></button>
+      <button class="filter-btn" data-filter="type" data-value="Work-in-Progress" onclick="setFilter('type','Work-in-Progress',this)">Work-in-Progress <span class="filter-count" id="cnt-type-wip"></span></button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="search-wrap">
+      <span class="search-icon">⌕</span>
+      <input type="search" id="search" placeholder="Search by title, author, keyword…" autocomplete="off" />
+      <div class="search-hint">TIP: search is full-text across titles, authors, and abstracts</div>
+    </div>
+
+    <div class="results-bar">
+      <span id="results-label">Showing all papers</span>
+    </div>
+
+    <div id="paper-list"></div>
+    <div class="no-results" id="no-results" style="display:none">No papers match your search.</div>
+  </main>
+</div>
+
+<footer>
+  IEEE EXAMPLE 2025 &nbsp;·&nbsp; Proceedings generated with static HTML + Lunr.js &nbsp;·&nbsp;
+  © 2025 IEEE. Personal use of this material is permitted.
+</footer>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+//  PAPER DATA
+//  ─ Edit this array to populate your real proceedings.
+//  ─ Fields: id, title, authors (array), abstract, session,
+//    day, time, type ("Full Paper" | "Work-in-Progress"), pdf
+// ════════════════════════════════════════════════════════════════
+const PAPERS = [
+  {
+    id: "p001",
+    title: "Adaptive Neural Architectures for Real-Time Embedded Control Systems",
+    authors: ["Alice M. Chen", "Bob K. Patel", "Carla Röttger"],
+    abstract: "We present a novel framework for deploying adaptive neural architectures on resource-constrained embedded platforms, achieving 3× latency reduction while maintaining control accuracy within 2%.",
+    session: "Session A: Embedded AI",
+    day: "Day 1",
+    time: "09:00–10:30",
+    type: "Full Paper",
+    pdf: "papers/p001.pdf"
+  },
+  {
+    id: "p002",
+    title: "Low-Power Hardware Accelerators for Edge Inference: A Comparative Study",
+    authors: ["David W. Huang", "Elena Vasquez"],
+    abstract: "This paper evaluates five hardware accelerator designs for edge inference tasks, comparing energy efficiency, throughput, and programming model complexity across FPGA and ASIC targets.",
+    session: "Session A: Embedded AI",
+    day: "Day 1",
+    time: "09:00–10:30",
+    type: "Full Paper",
+    pdf: "papers/p002.pdf"
+  },
+  {
+    id: "p003",
+    title: "Towards Explainable Anomaly Detection in Industrial IoT Pipelines",
+    authors: ["Fiona O'Brien", "Gustavo Lima"],
+    abstract: "We propose an attention-based anomaly detector with post-hoc explanation that localizes faults to specific sensor channels in industrial IoT settings.",
+    session: "Session A: Embedded AI",
+    day: "Day 1",
+    time: "09:00–10:30",
+    type: "Work-in-Progress",
+    pdf: "papers/p003.pdf"
+  },
+  {
+    id: "p004",
+    title: "Federated Learning Under Non-IID Data Distributions: Convergence Bounds",
+    authors: ["Hannah Kim", "Ivan Sokolov", "Jing Wei"],
+    abstract: "We derive tight convergence bounds for federated optimization under heterogeneous data and propose a variance-reduction mechanism that improves convergence by up to 40%.",
+    session: "Session B: Distributed Learning",
+    day: "Day 1",
+    time: "14:00–15:30",
+    type: "Full Paper",
+    pdf: "papers/p004.pdf"
+  },
+  {
+    id: "p005",
+    title: "Communication-Efficient Gradient Aggregation with Sketching",
+    authors: ["Kofi Asante", "Laura Mäkinen"],
+    abstract: "A sketch-based gradient compression scheme for federated settings that reduces communication cost by 8× with negligible accuracy loss on image classification benchmarks.",
+    session: "Session B: Distributed Learning",
+    day: "Day 1",
+    time: "14:00–15:30",
+    type: "Full Paper",
+    pdf: "papers/p005.pdf"
+  },
+  {
+    id: "p006",
+    title: "Secure Aggregation Protocols for Cross-Silo Federated Learning",
+    authors: ["Maria Santos", "Nikolaj Petrov"],
+    abstract: "We describe a cryptographically secure aggregation protocol for cross-silo federated learning and demonstrate its feasibility on a real-world medical imaging deployment.",
+    session: "Session B: Distributed Learning",
+    day: "Day 1",
+    time: "14:00–15:30",
+    type: "Work-in-Progress",
+    pdf: "papers/p006.pdf"
+  },
+  {
+    id: "p007",
+    title: "Human-in-the-Loop Active Learning for Rare Event Classification",
+    authors: ["Olivia Park", "Pedro Almeida", "Quinn Zhao"],
+    abstract: "We study how targeted human annotation in active learning loops accelerates rare event classifier training, reducing label budget by 60% compared to random sampling baselines.",
+    session: "Session C: Human-Machine Collaboration",
+    day: "Day 2",
+    time: "09:00–10:30",
+    type: "Full Paper",
+    pdf: "papers/p007.pdf"
+  },
+  {
+    id: "p008",
+    title: "Cognitive Load Estimation via Physiological Signals in Operator Interfaces",
+    authors: ["Rachel Nguyen", "Stefan Bauer"],
+    abstract: "A multimodal physiological sensing approach that estimates operator cognitive load in real time, enabling adaptive interface adjustments that reduce error rates by 22%.",
+    session: "Session C: Human-Machine Collaboration",
+    day: "Day 2",
+    time: "09:00–10:30",
+    type: "Full Paper",
+    pdf: "papers/p008.pdf"
+  },
+  {
+    id: "p009",
+    title: "A Framework for Trust Calibration in Semi-Autonomous Systems",
+    authors: ["Tomás Herrera"],
+    abstract: "We propose a trust calibration framework that dynamically adjusts automation level based on inferred operator trust, studied in a UAV supervision task.",
+    session: "Session C: Human-Machine Collaboration",
+    day: "Day 2",
+    time: "09:00–10:30",
+    type: "Work-in-Progress",
+    pdf: "papers/p009.pdf"
+  },
+  {
+    id: "p010",
+    title: "Robust Model Predictive Control with Deep Learning Uncertainty Estimates",
+    authors: ["Uma Krishnaswamy", "Victor Leroy", "Wendy Zhou"],
+    abstract: "We integrate Bayesian deep learning uncertainty estimates into an MPC framework and demonstrate improved constraint satisfaction in uncertain dynamics settings.",
+    session: "Session D: Control & Optimization",
+    day: "Day 2",
+    time: "14:00–15:30",
+    type: "Full Paper",
+    pdf: "papers/p010.pdf"
+  },
+  {
+    id: "p011",
+    title: "Differentiable Optimization Layers for End-to-End Learning in Planning",
+    authors: ["Xander Müller", "Yuki Tanaka"],
+    abstract: "We embed differentiable convex optimization layers into a deep planning pipeline, enabling end-to-end gradient-based training with hard constraint guarantees.",
+    session: "Session D: Control & Optimization",
+    day: "Day 2",
+    time: "14:00–15:30",
+    type: "Full Paper",
+    pdf: "papers/p011.pdf"
+  },
+  {
+    id: "p012",
+    title: "Online Adaptation of Learned Dynamics Models for Robotic Manipulation",
+    authors: ["Zara Ahmed", "Aaron Levy"],
+    abstract: "An online meta-learning approach that continuously adapts a learned dynamics model during robot manipulation, reducing task completion time by 35% after environment shifts.",
+    session: "Session D: Control & Optimization",
+    day: "Day 2",
+    time: "14:00–15:30",
+    type: "Work-in-Progress",
+    pdf: "papers/p012.pdf"
+  },
+  {
+    id: "p013",
+    title: "Multimodal Sensor Fusion for Autonomous Navigation in GPS-Denied Environments",
+    authors: ["Brigitte Fontaine", "Carlos Mendez", "Diana Wu"],
+    abstract: "We present a tightly coupled LiDAR–visual–inertial fusion system that achieves centimeter-level localization accuracy in indoor GPS-denied environments.",
+    session: "Session E: Autonomous Systems",
+    day: "Day 3",
+    time: "09:00–10:30",
+    type: "Full Paper",
+    pdf: "papers/p013.pdf"
+  },
+  {
+    id: "p014",
+    title: "Safety-Constrained Reinforcement Learning for Autonomous Driving Policy Synthesis",
+    authors: ["Edward Czajka", "Fatima Al-Rashid"],
+    abstract: "A constrained policy optimization approach for autonomous driving that guarantees collision-avoidance constraints during training and deployment under distributional shift.",
+    session: "Session E: Autonomous Systems",
+    day: "Day 3",
+    time: "09:00–10:30",
+    type: "Full Paper",
+    pdf: "papers/p014.pdf"
+  },
+  {
+    id: "p015",
+    title: "Sim-to-Real Transfer via Domain Randomization for Aerial Inspection Drones",
+    authors: ["Greta Lindholm"],
+    abstract: "We study domain randomization strategies that close the sim-to-real gap for inspection drone policies trained entirely in simulation, evaluating on a real bridge inspection task.",
+    session: "Session E: Autonomous Systems",
+    day: "Day 3",
+    time: "09:00–10:30",
+    type: "Work-in-Progress",
+    pdf: "papers/p015.pdf"
+  },
+  {
+    id: "p016",
+    title: "Formal Verification of Neural Network Controllers via Abstract Interpretation",
+    authors: ["Hiro Nakamura", "Isabella Ferrari", "Jack O'Connor"],
+    abstract: "We apply abstract interpretation-based verification to certify safety properties of neural network controllers, scaling to networks with over 100K parameters.",
+    session: "Session F: Verification & Safety",
+    day: "Day 3",
+    time: "14:00–15:30",
+    type: "Full Paper",
+    pdf: "papers/p016.pdf"
+  },
+  {
+    id: "p017",
+    title: "Runtime Monitoring of Learning-Enabled Cyber-Physical Systems",
+    authors: ["Klara Benson", "Luis Torres"],
+    abstract: "A runtime monitoring architecture for LEC-based CPS that detects distribution shift and triggers safe fallback modes, demonstrated on an autonomous lane-keeping system.",
+    session: "Session F: Verification & Safety",
+    day: "Day 3",
+    time: "14:00–15:30",
+    type: "Full Paper",
+    pdf: "papers/p017.pdf"
+  },
+  {
+    id: "p018",
+    title: "Adversarial Robustness Certification for Perception Modules in Autonomous Systems",
+    authors: ["Miriam Schultz"],
+    abstract: "We propose a certifiable robustness method for perception modules against adversarial patches, providing probabilistic guarantees on detection accuracy under worst-case perturbations.",
+    session: "Session F: Verification & Safety",
+    day: "Day 3",
+    time: "14:00–15:30",
+    type: "Work-in-Progress",
+    pdf: "papers/p018.pdf"
+  }
+];
+
+// ════════════════════════════════════════════════════════════════
+//  APP STATE
+// ════════════════════════════════════════════════════════════════
+let lunrIndex;
+let activeFilters = { day: 'all', type: 'all' };
+let searchQuery = '';
+
+// ─ Build Lunr index ─
+function buildIndex() {
+  lunrIndex = lunr(function () {
+    this.ref('id');
+    this.field('title', { boost: 10 });
+    this.field('authors', { boost: 6 });
+    this.field('abstract', { boost: 2 });
+    this.field('session', { boost: 3 });
+    this.metadataWhitelist = ['position'];
+    PAPERS.forEach(p => {
+      this.add({ ...p, authors: p.authors.join(' ') });
+    });
+  });
+}
+
+// ─ Render all sessions + cards ─
+function render() {
+  // Determine which papers to show
+  let visibleIds = null;
+  if (searchQuery.trim().length > 0) {
+    try {
+      const results = lunrIndex.search(searchQuery + '~1');
+      visibleIds = new Set(results.map(r => r.ref));
+    } catch(e) {
+      visibleIds = new Set();
+    }
+  }
+
+  // Apply sidebar filters
+  const filtered = PAPERS.filter(p => {
+    if (activeFilters.day !== 'all' && p.day !== activeFilters.day) return false;
+    if (activeFilters.type !== 'all' && p.type !== activeFilters.type) return false;
+    if (visibleIds !== null && !visibleIds.has(p.id)) return false;
+    return true;
+  });
+
+  // Group by session (preserving order)
+  const sessionMap = new Map();
+  filtered.forEach(p => {
+    if (!sessionMap.has(p.session)) sessionMap.set(p.session, []);
+    sessionMap.get(p.session).push(p);
+  });
+
+  const listEl = document.getElementById('paper-list');
+  listEl.innerHTML = '';
+
+  if (filtered.length === 0) {
+    document.getElementById('no-results').style.display = 'block';
+    document.getElementById('results-label').textContent = 'No papers match';
+    return;
+  }
+  document.getElementById('no-results').style.display = 'none';
+
+  const total = filtered.length;
+  document.getElementById('results-label').textContent =
+    searchQuery.trim() ? `${total} result${total !== 1 ? 's' : ''} for "${searchQuery}"` : `Showing ${total} paper${total !== 1 ? 's' : ''}`;
+
+  sessionMap.forEach((papers, sessionName) => {
+    const grp = document.createElement('div');
+    grp.className = 'session-group';
+
+    const info = papers[0];
+    grp.innerHTML = `
+      <div class="session-header">
+        <span class="session-day-badge">${info.day}</span>
+        <span class="session-name">${sessionName}</span>
+        <span class="session-time">${info.time}</span>
+      </div>
+    `;
+
+    papers.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'paper-card';
+      const typeClass = p.type === 'Work-in-Progress' ? 'type-wip' : 'type-full';
+      const typeShort = p.type === 'Work-in-Progress' ? 'WiP' : 'Full';
+      const authStr = p.authors.join(', ');
+
+      card.innerHTML = `
+        <div class="paper-title">${highlight(p.title)}</div>
+        <div class="paper-authors">${highlight(authStr)}</div>
+        <div class="paper-meta">
+          <span class="tag ${typeClass}">${typeShort}</span>
+          <span class="tag">${p.day}</span>
+          <a class="paper-pdf-link" href="${p.pdf}" target="_blank">↓ PDF</a>
+        </div>
+      `;
+      grp.appendChild(card);
+    });
+
+    listEl.appendChild(grp);
+  });
+}
+
+// ─ Simple highlight helper ─
+function highlight(text) {
+  if (!searchQuery.trim()) return text;
+  const words = searchQuery.trim().split(/\s+/).filter(w => w.length > 2);
+  if (!words.length) return text;
+  const re = new RegExp(`(${words.map(w => w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')})`, 'gi');
+  return text.replace(re, '<mark>$1</mark>');
+}
+
+// ─ Compute sidebar counts ─
+function updateCounts() {
+  const countFor = (field, value) =>
+    PAPERS.filter(p => value === 'all' || p[field] === value).length;
+
+  document.getElementById('cnt-day-all').textContent  = PAPERS.length;
+  document.getElementById('cnt-day-1').textContent    = countFor('day','Day 1');
+  document.getElementById('cnt-day-2').textContent    = countFor('day','Day 2');
+  document.getElementById('cnt-day-3').textContent    = countFor('day','Day 3');
+  document.getElementById('cnt-type-all').textContent = PAPERS.length;
+  document.getElementById('cnt-type-full').textContent= countFor('type','Full Paper');
+  document.getElementById('cnt-type-wip').textContent = countFor('type','Work-in-Progress');
+
+  // Hero stats
+  document.getElementById('total-count').textContent   = PAPERS.length;
+  document.getElementById('full-count').textContent    = countFor('type','Full Paper');
+  document.getElementById('wip-count').textContent     = countFor('type','Work-in-Progress');
+  const sessions = new Set(PAPERS.map(p => p.session));
+  document.getElementById('session-count').textContent = sessions.size;
+}
+
+// ─ Sidebar filter ─
+function setFilter(field, value, btn) {
+  activeFilters[field] = value;
+  // Update button states
+  document.querySelectorAll(`[data-filter="${field}"]`).forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+// ─ Init ─
+buildIndex();
+updateCounts();
+render();
+
+document.getElementById('search').addEventListener('input', function() {
+  searchQuery = this.value;
+  render();
+});
+</script>
+</body>
+</html>
