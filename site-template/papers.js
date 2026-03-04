@@ -1,0 +1,200 @@
+const PAPERS = [
+  {
+    "id": "p001",
+    "title": "Adaptive Neural Architectures for Real-Time Embedded Control Systems",
+    "authors": ["Alice M. Chen", "Bob K. Patel", "Carla Röttger"],
+    "abstract": "We present a novel framework for deploying adaptive neural architectures on resource-constrained embedded platforms, achieving 3× latency reduction while maintaining control accuracy within 2%.",
+    "session": "Session A: Embedded AI",
+    "day": "Day 1",
+    "time": "09:00–10:30",
+    "type": "Full Paper",
+    "pdf": "papers/p001.pdf"
+  },
+  {
+    "id": "p002",
+    "title": "Low-Power Hardware Accelerators for Edge Inference: A Comparative Study",
+    "authors": ["David W. Huang", "Elena Vasquez"],
+    "abstract": "This paper evaluates five hardware accelerator designs for edge inference tasks, comparing energy efficiency, throughput, and programming model complexity across FPGA and ASIC targets.",
+    "session": "Session A: Embedded AI",
+    "day": "Day 1",
+    "time": "09:00–10:30",
+    "type": "Full Paper",
+    "pdf": "papers/p002.pdf"
+  },
+  {
+    "id": "p003",
+    "title": "Towards Explainable Anomaly Detection in Industrial IoT Pipelines",
+    "authors": ["Fiona O'Brien", "Gustavo Lima"],
+    "abstract": "We propose an attention-based anomaly detector with post-hoc explanation that localizes faults to specific sensor channels in industrial IoT settings.",
+    "session": "Session A: Embedded AI",
+    "day": "Day 1",
+    "time": "09:00–10:30",
+    "type": "Work-in-Progress",
+    "pdf": "papers/p003.pdf"
+  },
+  {
+    "id": "p004",
+    "title": "Federated Learning Under Non-IID Data Distributions: Convergence Bounds",
+    "authors": ["Hannah Kim", "Ivan Sokolov", "Jing Wei"],
+    "abstract": "We derive tight convergence bounds for federated optimization under heterogeneous data and propose a variance-reduction mechanism that improves convergence by up to 40%.",
+    "session": "Session B: Distributed Learning",
+    "day": "Day 1",
+    "time": "14:00–15:30",
+    "type": "Full Paper",
+    "pdf": "papers/p004.pdf"
+  },
+  {
+    "id": "p005",
+    "title": "Communication-Efficient Gradient Aggregation with Sketching",
+    "authors": ["Kofi Asante", "Laura Mäkinen"],
+    "abstract": "A sketch-based gradient compression scheme for federated settings that reduces communication cost by 8× with negligible accuracy loss on image classification benchmarks.",
+    "session": "Session B: Distributed Learning",
+    "day": "Day 1",
+    "time": "14:00–15:30",
+    "type": "Full Paper",
+    "pdf": "papers/p005.pdf"
+  },
+  {
+    "id": "p006",
+    "title": "Secure Aggregation Protocols for Cross-Silo Federated Learning",
+    "authors": ["Maria Santos", "Nikolaj Petrov"],
+    "abstract": "We describe a cryptographically secure aggregation protocol for cross-silo federated learning and demonstrate its feasibility on a real-world medical imaging deployment.",
+    "session": "Session B: Distributed Learning",
+    "day": "Day 1",
+    "time": "14:00–15:30",
+    "type": "Work-in-Progress",
+    "pdf": "papers/p006.pdf"
+  },
+  {
+    "id": "p007",
+    "title": "Human-in-the-Loop Active Learning for Rare Event Classification",
+    "authors": ["Olivia Park", "Pedro Almeida", "Quinn Zhao"],
+    "abstract": "We study how targeted human annotation in active learning loops accelerates rare event classifier training, reducing label budget by 60% compared to random sampling baselines.",
+    "session": "Session C: Human-Machine Collaboration",
+    "day": "Day 2",
+    "time": "09:00–10:30",
+    "type": "Full Paper",
+    "pdf": "papers/p007.pdf"
+  },
+  {
+    "id": "p008",
+    "title": "Cognitive Load Estimation via Physiological Signals in Operator Interfaces",
+    "authors": ["Rachel Nguyen", "Stefan Bauer"],
+    "abstract": "A multimodal physiological sensing approach that estimates operator cognitive load in real time, enabling adaptive interface adjustments that reduce error rates by 22%.",
+    "session": "Session C: Human-Machine Collaboration",
+    "day": "Day 2",
+    "time": "09:00–10:30",
+    "type": "Full Paper",
+    "pdf": "papers/p008.pdf"
+  },
+  {
+    "id": "p009",
+    "title": "A Framework for Trust Calibration in Semi-Autonomous Systems",
+    "authors": ["Tomás Herrera"],
+    "abstract": "We propose a trust calibration framework that dynamically adjusts automation level based on inferred operator trust, studied in a UAV supervision task.",
+    "session": "Session C: Human-Machine Collaboration",
+    "day": "Day 2",
+    "time": "09:00–10:30",
+    "type": "Work-in-Progress",
+    "pdf": "papers/p009.pdf"
+  },
+  {
+    "id": "p010",
+    "title": "Robust Model Predictive Control with Deep Learning Uncertainty Estimates",
+    "authors": ["Uma Krishnaswamy", "Victor Leroy", "Wendy Zhou"],
+    "abstract": "We integrate Bayesian deep learning uncertainty estimates into an MPC framework and demonstrate improved constraint satisfaction in uncertain dynamics settings.",
+    "session": "Session D: Control & Optimization",
+    "day": "Day 2",
+    "time": "14:00–15:30",
+    "type": "Full Paper",
+    "pdf": "papers/p010.pdf"
+  },
+  {
+    "id": "p011",
+    "title": "Differentiable Optimization Layers for End-to-End Learning in Planning",
+    "authors": ["Xander Müller", "Yuki Tanaka"],
+    "abstract": "We embed differentiable convex optimization layers into a deep planning pipeline, enabling end-to-end gradient-based training with hard constraint guarantees.",
+    "session": "Session D: Control & Optimization",
+    "day": "Day 2",
+    "time": "14:00–15:30",
+    "type": "Full Paper",
+    "pdf": "papers/p011.pdf"
+  },
+  {
+    "id": "p012",
+    "title": "Online Adaptation of Learned Dynamics Models for Robotic Manipulation",
+    "authors": ["Zara Ahmed", "Aaron Levy"],
+    "abstract": "An online meta-learning approach that continuously adapts a learned dynamics model during robot manipulation, reducing task completion time by 35% after environment shifts.",
+    "session": "Session D: Control & Optimization",
+    "day": "Day 2",
+    "time": "14:00–15:30",
+    "type": "Work-in-Progress",
+    "pdf": "papers/p012.pdf"
+  },
+  {
+    "id": "p013",
+    "title": "Multimodal Sensor Fusion for Autonomous Navigation in GPS-Denied Environments",
+    "authors": ["Brigitte Fontaine", "Carlos Mendez", "Diana Wu"],
+    "abstract": "We present a tightly coupled LiDAR–visual–inertial fusion system that achieves centimeter-level localization accuracy in indoor GPS-denied environments.",
+    "session": "Session E: Autonomous Systems",
+    "day": "Day 3",
+    "time": "09:00–10:30",
+    "type": "Full Paper",
+    "pdf": "papers/p013.pdf"
+  },
+  {
+    "id": "p014",
+    "title": "Safety-Constrained Reinforcement Learning for Autonomous Driving Policy Synthesis",
+    "authors": ["Edward Czajka", "Fatima Al-Rashid"],
+    "abstract": "A constrained policy optimization approach for autonomous driving that guarantees collision-avoidance constraints during training and deployment under distributional shift.",
+    "session": "Session E: Autonomous Systems",
+    "day": "Day 3",
+    "time": "09:00–10:30",
+    "type": "Full Paper",
+    "pdf": "papers/p014.pdf"
+  },
+  {
+    "id": "p015",
+    "title": "Sim-to-Real Transfer via Domain Randomization for Aerial Inspection Drones",
+    "authors": ["Greta Lindholm"],
+    "abstract": "We study domain randomization strategies that close the sim-to-real gap for inspection drone policies trained entirely in simulation, evaluating on a real bridge inspection task.",
+    "session": "Session E: Autonomous Systems",
+    "day": "Day 3",
+    "time": "09:00–10:30",
+    "type": "Work-in-Progress",
+    "pdf": "papers/p015.pdf"
+  },
+  {
+    "id": "p016",
+    "title": "Formal Verification of Neural Network Controllers via Abstract Interpretation",
+    "authors": ["Hiro Nakamura", "Isabella Ferrari", "Jack O'Connor"],
+    "abstract": "We apply abstract interpretation-based verification to certify safety properties of neural network controllers, scaling to networks with over 100K parameters.",
+    "session": "Session F: Verification & Safety",
+    "day": "Day 3",
+    "time": "14:00–15:30",
+    "type": "Full Paper",
+    "pdf": "papers/p016.pdf"
+  },
+  {
+    "id": "p017",
+    "title": "Runtime Monitoring of Learning-Enabled Cyber-Physical Systems",
+    "authors": ["Klara Benson", "Luis Torres"],
+    "abstract": "A runtime monitoring architecture for LEC-based CPS that detects distribution shift and triggers safe fallback modes, demonstrated on an autonomous lane-keeping system.",
+    "session": "Session F: Verification & Safety",
+    "day": "Day 3",
+    "time": "14:00–15:30",
+    "type": "Full Paper",
+    "pdf": "papers/p017.pdf"
+  },
+  {
+    "id": "p018",
+    "title": "Adversarial Robustness Certification for Perception Modules in Autonomous Systems",
+    "authors": ["Miriam Schultz"],
+    "abstract": "We propose a certifiable robustness method for perception modules against adversarial patches, providing probabilistic guarantees on detection accuracy under worst-case perturbations.",
+    "session": "Session F: Verification & Safety",
+    "day": "Day 3",
+    "time": "14:00–15:30",
+    "type": "Work-in-Progress",
+    "pdf": "papers/p018.pdf"
+  }
+];
