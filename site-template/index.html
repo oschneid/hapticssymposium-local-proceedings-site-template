@@ -431,14 +431,6 @@
         <span class="stat-label">Total Papers</span>
       </div>
       <div class="stat">
-        <span class="stat-num" id="full-count">—</span>
-        <span class="stat-label">Full Papers</span>
-      </div>
-      <div class="stat">
-        <span class="stat-num" id="wip-count">—</span>
-        <span class="stat-label">Work-in-Progress</span>
-      </div>
-      <div class="stat">
         <span class="stat-num" id="session-count">—</span>
         <span class="stat-label">Sessions</span>
       </div>
@@ -616,8 +608,6 @@ function updateCounts() {
 
   // Hero stats
   document.getElementById('total-count').textContent   = PAPERS.length;
-  document.getElementById('full-count').textContent    = countFor('type','Full Paper');
-  document.getElementById('wip-count').textContent     = countFor('type','Work-in-Progress');
   const sessions = new Set(PAPERS.map(p => p.session));
   document.getElementById('session-count').textContent = sessions.size;
 }
