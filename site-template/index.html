@@ -459,7 +459,9 @@
     <div class="sidebar-section">
       <div class="sidebar-label">Paper Type</div>
       <button class="filter-btn active" data-filter="type" data-value="all" onclick="setFilter('type','all',this)">All Types <span class="filter-count" id="cnt-type-all"></span></button>
-      <button class="filter-btn" data-filter="type" data-value="Full Paper" onclick="setFilter('type','Full Paper',this)">Full Papers <span class="filter-count" id="cnt-type-full"></span></button>
+      <button class="filter-btn" data-filter="type" data-value="Full Paper" onclick="setFilter('type','Regular',this)">Regular Papers <span class="filter-count" id="cnt-type-regular"></span></button>
+      <button class="filter-btn" data-filter="type" data-value="Work-in-Progress" onclick="setFilter('type','Long',this)">Long Papers <span class="filter-count" id="cnt-type-long"></span></button>
+      <button class="filter-btn" data-filter="type" data-value="Full Paper" onclick="setFilter('type','ToH',this)">Transactions on Haptics <span class="filter-count" id="cnt-type-toh"></span></button>
       <button class="filter-btn" data-filter="type" data-value="Work-in-Progress" onclick="setFilter('type','Work-in-Progress',this)">Work-in-Progress <span class="filter-count" id="cnt-type-wip"></span></button>
     </div>
   </aside>
@@ -607,7 +609,9 @@ function updateCounts() {
   document.getElementById('cnt-day-2').textContent    = countFor('day','Day 2');
   document.getElementById('cnt-day-3').textContent    = countFor('day','Day 3');
   document.getElementById('cnt-type-all').textContent = PAPERS.length;
-  document.getElementById('cnt-type-full').textContent= countFor('type','Full Paper');
+  document.getElementById('cnt-type-regular').textContent= countFor('type','Regular');
+  document.getElementById('cnt-type-long').textContent= countFor('type','Long');
+  document.getElementById('cnt-type-toh').textContent= countFor('type','ToH');
   document.getElementById('cnt-type-wip').textContent = countFor('type','Work-in-Progress');
 
   // Hero stats
