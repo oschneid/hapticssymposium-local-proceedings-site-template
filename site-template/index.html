@@ -572,7 +572,7 @@ function render() {
         <div class="paper-meta">
           <span class="tag ${typeClass}">${typeShort}</span>
           <span class="tag">${p.day}</span>
-          ${p.pdf ? `<a class="paper-pdf-link" href="${p.pdf}" target="_blank">↓ PDF</a>` : ''}
+          ${p.pdf ? `<a class="paper-pdf-link" href="${p.pdf}" target="_blank" rel="noopener noreferrer">↓ PDF</a>` : ''}
         </div>
       `;
       grp.appendChild(card);
