@@ -29,7 +29,7 @@ const PAPERS = [
     "session": "Session A: Embedded AI",
     "day": "Day 1",
     "time": "09:00–10:30",
-    "type": "Work-in-Progress",
+    "type": "WIP",
     "pdf": "papers/p003.pdf"
   },
   {
@@ -62,7 +62,7 @@ const PAPERS = [
     "session": "Session B: Distributed Learning",
     "day": "Day 1",
     "time": "14:00–15:30",
-    "type": "Work-in-Progress",
+    "type": "WIP",
     "pdf": "papers/p006.pdf"
   },
   {
@@ -95,7 +95,7 @@ const PAPERS = [
     "session": "Session C: Human-Machine Collaboration",
     "day": "Day 2",
     "time": "09:00–10:30",
-    "type": "Work-in-Progress",
+    "type": "WIP",
     "pdf": "papers/p009.pdf"
   },
   {
@@ -128,7 +128,7 @@ const PAPERS = [
     "session": "Session D: Control & Optimization",
     "day": "Day 2",
     "time": "14:00–15:30",
-    "type": "Work-in-Progress",
+    "type": "WIP",
     "pdf": "papers/p012.pdf"
   },
   {
@@ -161,7 +161,7 @@ const PAPERS = [
     "session": "Session E: Autonomous Systems",
     "day": "Day 3",
     "time": "09:00–10:30",
-    "type": "Work-in-Progress",
+    "type": "WIP",
     "pdf": "papers/p015.pdf"
   },
   {
@@ -194,7 +194,7 @@ const PAPERS = [
     "session": "Session F: Verification & Safety",
     "day": "Day 3",
     "time": "14:00–15:30",
-    "type": "Work-in-Progress",
+    "type": "WIP",
     "pdf": "papers/p018.pdf"
   }
 ];
