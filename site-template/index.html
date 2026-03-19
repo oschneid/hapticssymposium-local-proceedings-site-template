@@ -444,9 +444,9 @@
     <div class="sidebar-section">
       <div class="sidebar-label">Filter by Day</div>
       <button class="filter-btn active" data-filter="day" data-value="all" onclick="setFilter('day','all',this)">All Days <span class="filter-count" id="cnt-day-all"></span></button>
-      <button class="filter-btn" data-filter="day" data-value="Day 1" onclick="setFilter('day','Day 1',this)">Day 2 — Mar 30 <span class="filter-count" id="cnt-day-1"></span></button>
-      <button class="filter-btn" data-filter="day" data-value="Day 2" onclick="setFilter('day','Day 2',this)">Day 3 — Mar 31 <span class="filter-count" id="cnt-day-2"></span></button>
-      <button class="filter-btn" data-filter="day" data-value="Day 3" onclick="setFilter('day','Day 3',this)">Day 4 — Apr 1  <span class="filter-count" id="cnt-day-3"></span></button>
+      <button class="filter-btn" data-filter="day" data-value="Day 2 (Mon)" onclick="setFilter('day','Day 2 (Mon)',this)">Day 2 (Mon) — Mar 30 <span class="filter-count" id="cnt-day-2"></span></button>
+      <button class="filter-btn" data-filter="day" data-value="Day 3 (Tue)" onclick="setFilter('day','Day 3 (Tue)',this)">Day 3 (Tue) — Mar 31 <span class="filter-count" id="cnt-day-3"></span></button>
+      <button class="filter-btn" data-filter="day" data-value="Day 4 (Wed)" onclick="setFilter('day','Day 4 (Wed)',this)">Day 4 (Wed) — Apr 1  <span class="filter-count" id="cnt-day-4"></span></button>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-label">Paper Type</div>
@@ -597,9 +597,9 @@ function updateCounts() {
     PAPERS.filter(p => value === 'all' || p[field] === value).length;
 
   document.getElementById('cnt-day-all').textContent  = PAPERS.length;
-  document.getElementById('cnt-day-1').textContent    = countFor('day','Day 1');
-  document.getElementById('cnt-day-2').textContent    = countFor('day','Day 2');
-  document.getElementById('cnt-day-3').textContent    = countFor('day','Day 3');
+  document.getElementById('cnt-day-2').textContent    = countFor('day','Day 2 (Mon)');
+  document.getElementById('cnt-day-3').textContent    = countFor('day','Day 3 (Tue)');
+  document.getElementById('cnt-day-4').textContent    = countFor('day','Day 4 (Wed)');
   document.getElementById('cnt-type-all').textContent = PAPERS.length;
   document.getElementById('cnt-type-regular').textContent= countFor('type','Regular');
   document.getElementById('cnt-type-long').textContent= countFor('type','Long');
